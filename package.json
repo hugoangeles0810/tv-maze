@@ -4,7 +4,8 @@
   "description": "A TVMaze wrapper client",
   "main": "index.js",
   "scripts": {
-    "test": "tape test/*-test.js | tap-spec"
+    "lint": "standard",
+    "test": "npm run lint && tape test/*-test.js | tap-spec"
   },
   "keywords": [
     "tvmaze",
@@ -14,6 +15,7 @@
   "author": "Hugo Angeles",
   "license": "MIT",
   "devDependencies": {
+    "standard": "^6.0.3",
     "tap-spec": "^4.1.1",
     "tape": "^4.4.0"
   }
