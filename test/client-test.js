@@ -14,6 +14,38 @@ test('should create a client', function (t) {
   t.end()
 })
 
+test('should fail with unknown endpoint', function (t) {
+  var client = tvmaze.createClient({endpoint: endpoint})
+
+  nock(endpoint)
+    .get('/foo')
+    .reply(404)
+
+  client._request('/foo', 'GET', null, function (err, body) {
+    t.ok(err, 'should fail')
+    t.end()
+  })
+})
+
+test('should fail if not query is passed', function (t) {
+  var client = tvmaze.createClient({endpoint: endpoint})
+
+  nock(endpoint)
+    .get('/search/shows')
+    .reply(400, {
+      code: 0,
+      message: 'Missing required parameter: q',
+      name: 'Bad request',
+      status: 400
+    })
+
+  client._request('/search/shows', 'GET', null, function (err, res) {
+    t.ok(err, 'bad request error')
+    t.notOk(res, 'should be null')
+    t.end()
+  })
+})
+
 test('should list shows', function (t) {
   var client = tvmaze.createClient({endpoint: endpoint})
 
@@ -44,6 +76,22 @@ test('should search show', function (t) {
     t.error(err, 'should not be an error')
     t.ok(Array.isArray(shows), 'should be an array')
     t.equals(shows[0].name, 'Limitless', 'should retrieve a show name')
+    t.end()
+  })
+})
+
+test('should search a single show', function (t) {
+  var client = tvmaze.createClient({endpoint: endpoint})
+
+  nock(endpoint)
+    .get('/singlesearch/shows')
+    .query({ q: 'lost' })
+    .reply(200, { name: 'Lost' })
+
+  client.search('lost', { single: true }, function (err, show) {
+    t.error(err, 'should not be an error')
+    t.notOk(Array.isArray(show), 'should be a single result')
+    t.equals(show.name, 'Lost', 'should retrieve a show name')
     t.end()
   })
 })
