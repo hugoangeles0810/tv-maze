@@ -2,7 +2,7 @@
 
 ## Usage
 
-... js
+```javascript
 var tvmaze = require('tv-maze')
 
 var client = tvmaze.createClient()
@@ -14,4 +14,4 @@ client.shows(function (err, shows) {
 client.search('lost', function (err, shows){
   // do something shows
 })
-...
+```
