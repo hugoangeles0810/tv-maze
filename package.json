@@ -1,0 +1,20 @@
+{
+  "name": "tv-maze",
+  "version": "1.0.0",
+  "description": "A TVMaze wrapper client",
+  "main": "index.js",
+  "scripts": {
+    "test": "tape test/*-test.js | tap-spec"
+  },
+  "keywords": [
+    "tvmaze",
+    "tv",
+    "shows"
+  ],
+  "author": "Hugo Angeles",
+  "license": "MIT",
+  "devDependencies": {
+    "tap-spec": "^4.1.1",
+    "tape": "^4.4.0"
+  }
+}
