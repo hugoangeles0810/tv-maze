@@ -7,6 +7,10 @@
     "lint": "standard",
     "test": "npm run lint && tape test/*-test.js | tap-spec"
   },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/hugoangeles0810/tv-maze.git"
+  },
   "keywords": [
     "tvmaze",
     "tv",
@@ -15,8 +19,12 @@
   "author": "Hugo Angeles",
   "license": "MIT",
   "devDependencies": {
+    "nock": "^7.0.2",
     "standard": "^6.0.3",
     "tap-spec": "^4.1.1",
     "tape": "^4.4.0"
+  },
+  "dependencies": {
+    "client-request": "^1.0.1"
   }
 }
